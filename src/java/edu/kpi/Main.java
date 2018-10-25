@@ -1,4 +1,4 @@
-package main.java.edu.kpi;
+package java.edu.kpi;
 
 public class Main {
 
