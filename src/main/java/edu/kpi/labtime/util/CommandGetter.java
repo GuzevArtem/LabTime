@@ -21,13 +21,21 @@ public class CommandGetter {
 
     private Map<String,List<Param>> commands = null;
 
-    public final Param LAB_ID_PARAM = param("Id", Integer.class);
-    public final Param LAB_SUBJECT_PARAM = param("subject", String.class);
-    public final Param LAB_NUMBER_PARAM = param("number", Integer.class);
-    public final Param LAB_DESCRIPTION_PARAM = param("description", String.class);
-    public final Param LAB_TASK_PARAM = param("task", String.class);
-    public final Param LAB_REQUIREMENTS_PARAM = param("requirements", String.class);
-    public final Param LAB_END_DATE_PARAM = param("endDate", LocalTime.class);
+    public static final String LAB_ID_STR = "Id";
+    public static final String LAB_SUBJECT_STR = "subject";
+    public static final String LAB_NUMBER_STR = "number";
+    public static final String LAB_DESCRIPTION_STR = "description";
+    public static final String LAB_TASK_STR = "task";
+    public static final String LAB_REQUIREMENTS_STR = "requirements";
+    public static final String LAB_END_DATE_STR = "endDate";
+
+    public static final Param LAB_ID_PARAM = param(LAB_ID_STR, Integer.class);
+    public static final Param LAB_SUBJECT_PARAM = param(LAB_SUBJECT_STR, String.class);
+    public static final Param LAB_NUMBER_PARAM = param(LAB_NUMBER_STR, Integer.class);
+    public static final Param LAB_DESCRIPTION_PARAM = param(LAB_DESCRIPTION_STR, String.class);
+    public static final Param LAB_TASK_PARAM = param(LAB_TASK_STR, String.class);
+    public static final Param LAB_REQUIREMENTS_PARAM = param(LAB_REQUIREMENTS_STR, String.class);
+    public static final Param LAB_END_DATE_PARAM = param(LAB_END_DATE_STR, LocalTime.class);
 
     public Map<String,List<Param>> getCommands(){
         if(commands == null) {

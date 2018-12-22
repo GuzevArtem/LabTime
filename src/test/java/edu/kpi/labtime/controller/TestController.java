@@ -18,15 +18,11 @@ public class TestController {
         controller = new Controller();
     }
 
-    @Ignore
     @Test
     public void newLabTest() {
         try {
             Result result = controller.execute(controller.parseInput(INPUT_NEW_LAB));
             Assert.assertEquals(Result.ResultType.LAB, result.getType());
-            Assert.assertTrue(result.getMessage().contains("id="));
-            Integer id = Integer.valueOf(result.getMessage().substring(result.getMessage().indexOf("id=")+3));
-            Assert.assertNotNull(id);
             Assert.assertTrue(result.getMessage().contains("subject='java'"));
             Assert.assertTrue(result.getMessage().contains("task='tdd'"));
             Assert.assertTrue(result.getMessage().contains("requirements='todo'"));

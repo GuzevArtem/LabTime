@@ -22,4 +22,12 @@ public interface Command {
 
     String C_COPY       = "cpy";
 
+    String C_NEW_REMAINDER = "rmdnew";
+
+    String C_DELTE_REMAINDER = "rmddel";
+
+    String C_GET_REMAINDER = "rmdget";
+
+    String C_SET_REMAINDER = "rmdset";
+
 }

@@ -11,7 +11,7 @@ abstract class ResultImpl implements Result {
 
     @Override
     public ResultType getType() {
-        return null;
+        return type;
     }
 
     @Override

@@ -253,7 +253,7 @@ public class Parser {
      */
     private void getComponentAsId(String component, List<Param> params) throws InvalidParamTypeException {
         try {
-            params.add(new Param<Integer>("Id",Integer.parseInt(component)));
+            params.add(new Param<Integer>(CommandGetter.LAB_ID_STR,Integer.parseInt(component)));
         } catch (NumberFormatException e) {
             throw new InvalidParamTypeException(component, e, "Integer");
         }
