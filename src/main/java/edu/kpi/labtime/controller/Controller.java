@@ -23,9 +23,12 @@ public class Controller {
 
     public void run() {
         view.display("WELCOME TO LABTIME");
-
+        String input;
         while(true) {
-            String input = sc.nextLine();
+            input = sc.nextLine();
+            if(input.length() == 0) {
+                continue;
+            }
             try {
                 Pair<String,List<Param>> command = parseInput(input);
                 Result result = execute(command);
@@ -44,15 +47,15 @@ public class Controller {
         view.display("LABS WILL WAIT FOR YOU");
     }
 
-    private Pair<String,List<Param>> parseInput(String input) throws LTException {
+    public Pair<String,List<Param>> parseInput(String input) throws LTException {
             return parser.parseCommand(input);
     }
 
-    private Result execute(Pair<String,List<Param>> command){
+    public Result execute(Pair<String,List<Param>> command){
         return execute(command.getKey(),command.getValue());
     }
 
-    private Result execute(String command, List<Param> params){
+    public Result execute(String command, List<Param> params){
         return new ResultString("NO BUSINESS LOGIC STILL");
     }
 

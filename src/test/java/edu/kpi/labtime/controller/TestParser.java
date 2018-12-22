@@ -1,6 +1,5 @@
 package edu.kpi.labtime.controller;
 
-import edu.kpi.labtime.exception.ShutdownException;
 import edu.kpi.labtime.exception.validation.InvalidCommandNameException;
 import edu.kpi.labtime.exception.validation.InvalidParamException;
 import edu.kpi.labtime.exception.validation.InvalidParamNameException;
@@ -21,7 +20,6 @@ public class TestParser {
     public void _init() {
         parser = Parser.getInstance();
     }
-
 
     @Test
     public void parseCommandUnknownTest() {
@@ -112,5 +110,4 @@ public class TestParser {
         String actual = (String) command.getValue().stream().filter(param -> paramName.equals(param.getName())).findFirst().get().getValue();
         Assert.assertEquals("test",actual);
     }
-
 }
