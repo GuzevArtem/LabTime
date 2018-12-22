@@ -1,7 +1,7 @@
 package edu.kpi.labtime.view;
 
-import edu.kpi.labtime.model.Lab;
-import edu.kpi.labtime.model.result.Result;
+import edu.kpi.labtime.dto.Lab;
+import edu.kpi.labtime.dto.result.Result;
 
 public class View {
 

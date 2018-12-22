@@ -5,9 +5,9 @@ import edu.kpi.labtime.exception.HelpException;
 import edu.kpi.labtime.exception.LTException;
 import edu.kpi.labtime.exception.ShutdownException;
 import edu.kpi.labtime.exception.validation.ValidationException;
-import edu.kpi.labtime.model.Param;
-import edu.kpi.labtime.model.result.Result;
-import edu.kpi.labtime.model.result.ResultString;
+import edu.kpi.labtime.dto.Param;
+import edu.kpi.labtime.dto.result.Result;
+import edu.kpi.labtime.dto.result.ResultString;
 import edu.kpi.labtime.view.View;
 import javafx.util.Pair;
 

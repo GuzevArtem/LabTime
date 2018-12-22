@@ -3,7 +3,7 @@ package edu.kpi.labtime.controller;
 import edu.kpi.labtime.exception.HelpException;
 import edu.kpi.labtime.exception.LTException;
 import edu.kpi.labtime.exception.validation.*;
-import edu.kpi.labtime.model.Param;
+import edu.kpi.labtime.dto.Param;
 import edu.kpi.labtime.exception.ShutdownException;
 import edu.kpi.labtime.util.CommandGetter;
 import javafx.util.Pair;
@@ -44,6 +44,7 @@ public class Parser {
      */
     public Pair<String,List<Param>> parseCommand(String command) throws LTException {
         String[] components = command.split("\\s+");
+        checkComponents(components);
         String commandName = components[0];
         switch (commandName) {
             case Command.C_NEW:
@@ -90,9 +91,17 @@ public class Parser {
      */
     private Pair<String,List<Param>> parseGet(String[] components) throws ValidationException {
         List<Param> params = new ArrayList<>();
-        params.add(new Param<Integer>("Id",Integer.parseInt(components[1])));
-        for(int i = 2; i < components.length; i++) {
-            params.add(parseParam(components[0],components[i]));
+        if(components.length == 1) {
+            return new Pair<>(components[0], new ArrayList<>());
+        }
+        int firstParamToParse = 1;
+        try {
+            getComponentAsId(components[1], params);
+            firstParamToParse++;
+        }
+        catch (InvalidParamTypeException ignored) {}
+        for(int i = firstParamToParse; i < components.length; i++) {
+            params.add(parseParam(components[0], components[i]));
         }
         return new Pair<>(components[0], params);
     }
@@ -105,7 +114,7 @@ public class Parser {
      */
     private Pair<String,List<Param>> parseSet(String[] components) throws ValidationException {
         List<Param> params = new ArrayList<>();
-        params.add(new Param<Integer>("Id",Integer.parseInt(components[1])));
+        getComponentAsId(components[1], params);
         for(int i = 2; i < components.length; i++) {
             params.add(parseParam(components[0],components[i]));
         }
@@ -120,7 +129,7 @@ public class Parser {
      */
     private Pair<String,List<Param>> parseAlt(String[] components) throws ValidationException {
         List<Param> params = new ArrayList<>();
-        params.add(new Param<Integer>("Id",Integer.parseInt(components[1])));
+        getComponentAsId(components[1], params);
         for(int i = 2; i < components.length; i++) {
             params.add(parseParam(components[0],components[i]));
         }
@@ -135,11 +144,7 @@ public class Parser {
      */
     private Pair<String,List<Param>> parseCpy(String[] components) throws ValidationException {
         List<Param> params = new ArrayList<>();
-        try {
-            params.add(new Param<Integer>("Id",Integer.parseInt(components[1])));
-        } catch (NumberFormatException e) {
-            throw new InvalidParamTypeException(components[1], e, "Integer");
-        }
+        getComponentAsId(components[1], params);
         for(int i = 2; i < components.length; i++) {
             params.add(parseParam(components[0],components[i]));
         }
@@ -154,11 +159,7 @@ public class Parser {
      */
     private Pair<String,List<Param>> parseDel(String[] components) throws ValidationException {
         List<Param> params = new ArrayList<>();
-        try {
-            params.add(new Param<Integer>("Id",Integer.parseInt(components[1])));
-        } catch (NumberFormatException e) {
-            throw new InvalidParamTypeException(components[1], e, "Integer");
-        }
+        getComponentAsId(components[1], params);
         return new Pair<>(components[0], params);
     }
 
@@ -241,5 +242,69 @@ public class Parser {
         } //todo: extend as we get more types
 
         return newParam;
+    }
+
+
+    /**
+     * @param component String to parse
+     * @param params to save
+     * @throws InvalidParamTypeException if parse fails
+     */
+    private void getComponentAsId(String component, List<Param> params) throws InvalidParamTypeException {
+        try {
+            params.add(new Param<Integer>("Id",Integer.parseInt(component)));
+        } catch (NumberFormatException e) {
+            throw new InvalidParamTypeException(component, e, "Integer");
+        }
+    }
+
+    /**
+     * @param components String to parse splited by separator
+     * @throws ValidationException if components are invalid
+     */
+    private void checkComponents(String[] components) throws ValidationException {
+        if(components == null || components.length == 0){
+            throw new ValidationException("There are no input.");
+        }
+        switch (components[0]) {
+                case Command.C_NEW:
+                    if(components.length < 2) {
+                        throw new ValidationException("There are less than 2 required params.");
+                    }
+                    return;
+                case Command.C_GET:
+                    //any checks?
+                    return;
+                case Command.C_SET:
+                    if(components.length < 2) {
+                        throw new ValidationException("There are less than 2 required params.");
+                    }
+                    return;
+                case Command.C_ALTER:
+                    if(components.length < 2) {
+                        throw new ValidationException("There are less than 2 required params.");
+                    }
+                    return;
+                case Command.C_COPY:
+                    if(components.length < 2) {
+                        throw new ValidationException("There are less than 2 required params.");
+                    }
+                    return;
+                case Command.C_DELETE:
+                    if(components.length < 2) {
+                        throw new ValidationException("There are less than 2 required params.");
+                    }
+                    return;
+                case Command.C_GET_VALUE:
+                    if(components.length < 2) {
+                        throw new ValidationException("There are less than 3 required params.");
+                    }
+                    return;
+                case Command.S_SHUTDOWN:
+                case Command.S_HELP:
+                    return;
+                    default:
+                        throw new InvalidCommandNameException("Invalid command Name: ", components[0]);
+        }
     }
 }

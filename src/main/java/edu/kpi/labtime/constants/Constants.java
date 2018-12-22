@@ -12,7 +12,9 @@ public interface Constants {
             "get /paramname:value_min&value_max                          --get all in selected param range \t&\n" +
             "get /paramname:value1|value2                                --get all with paramname value equals to value1 or value2\t|\n" +
             "get /paramname1:value1 [.../paramnameN:valueN]              --get all with paramname1 value equals to value1 (and paramnameN value equals to valueN)\n" +
-            "getValue <paramname> <item key>                             --get specified param value of specified item\n" +
+            "getValue <paramname> <key>                                  --get specified param value of specified item\n" +
             "getValue <paramname>                                        --get all used values of specified params\n" +
-            "cpy <key>                                                   --creates a copy of selected item with new key\n";
+            "cpy <key>                                                   --creates a copy of selected item with new key\n" +
+            "help                                                        --calls this message\n" +
+            "quit                                                        --closing application\n";
 }

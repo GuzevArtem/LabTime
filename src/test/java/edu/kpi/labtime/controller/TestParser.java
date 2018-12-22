@@ -1,10 +1,10 @@
 package edu.kpi.labtime.controller;
 
+import edu.kpi.labtime.dto.Param;
 import edu.kpi.labtime.exception.validation.InvalidCommandNameException;
 import edu.kpi.labtime.exception.validation.InvalidParamException;
 import edu.kpi.labtime.exception.validation.InvalidParamNameException;
 import edu.kpi.labtime.exception.validation.InvalidParamTypeException;
-import edu.kpi.labtime.model.Param;
 import javafx.util.Pair;
 import org.junit.Assert;
 import org.junit.Before;

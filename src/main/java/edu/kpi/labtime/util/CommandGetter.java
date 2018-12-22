@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.kpi.labtime.constants.Command;
-import edu.kpi.labtime.model.Param;
+import edu.kpi.labtime.dto.Param;
 
 public class CommandGetter {
 
