@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import edu.kpi.labtime.constants.Command;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Singelton class, using for parsing CLI input.
@@ -171,7 +172,7 @@ public class Parser {
      */
     private Pair<String,List<Param>> parseGetValue(String[] components) throws ValidationException  {
         //todo
-        return null;
+        throw new ValidationException(new NotImplementedException());
     }
 
     /**
@@ -184,12 +185,12 @@ public class Parser {
         String value;
 
         if('/' != param.charAt(0)) {
-            throw new InvalidParamException(param, "\'/\'not found.");
+            throw new InvalidParamException("\t\'/\'not found.", param);
         }
         param = param.substring(1);
         String pv[] = param.split(":");
         if(pv.length != 2) {
-            throw new InvalidParamException(param,"\':\' not found.");
+            throw new InvalidParamException("\':\' not found.",param);
         }
         paramName = pv[0];
         value = pv[1];//todo: parse complicated value
